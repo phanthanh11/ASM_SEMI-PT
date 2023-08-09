@@ -1,0 +1,596 @@
+
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    <link rel="stylesheet" href="https://bootswatch.com/5/zephyr/bootstrap.min.css"
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+{% block heeder %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Webpage Design</title>
+
+    </head>
+    <body>
+
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">XipoStore</h2>
+            </div>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="http://127.0.0.1:8000/">HOME</a></li>
+                    <li><a href="http://127.0.0.1:8000/productuser">PRODUCT</a></li>
+
+                    <li><a href="http://127.0.0.1:8000/contact/new">CONTACT</a></li>
+
+
+                </ul>
+            </div>
+
+
+
+
+            <ul class="navbar-nav">
+                <form class="d-flex" action="{{ path('search') }}" method="GET" style="margin-right: 40px;">
+                    <input class="form-control me-sm-0" type="search" name="keyword" placeholder="Search" required>
+                    <button class="btn btn-secondary my-2 my-sm-0 mx-2" type="submit">Search</button>
+                </form>
+
+
+            </ul>
+
+
+
+
+
+            <form>
+                <a class="btn btn-secondary" href="/{{ app.user ? 'logout' : 'login' }}" @click="isOpen = false">
+                    {{ app.user ? 'logout' : 'login'}}
+                </a>
+            </form>
+
+        </div>
+
+    </div>
+    </div>
+    </div>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    </body>
+    </html>
+{% endblock %}
+{% block body %}
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        .main{
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%), url(1.jpg);
+            background-position: center;
+            background-size: cover;
+            height: 10vh;
+        }
+
+        .navbar{
+            width: 1200px;
+            height: 75px;
+            margin: auto;
+        }
+
+        .icon{
+            width: 200px;
+            float: left;
+            height: 70px;
+        }
+
+        .logo{
+            color: #ff7200;
+            font-size: 35px;
+            font-family: Arial;
+            padding-left: 20px;
+            float: left;
+            padding-top: 10px;
+            margin-top: 5px
+        }
+
+        .menu{
+            width: 400px;
+            float: left;
+            height: 70px;
+        }
+
+        ul{
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        ul li{
+            list-style: none;
+            margin-left: 62px;
+            margin-top: 27px;
+            font-size: 14px;
+        }
+
+        ul li a{
+            text-decoration: none;
+            color: #fff;
+            font-family: Arial;
+            font-weight: bold;
+            transition: 0.4s ease-in-out;
+        }
+
+        ul li a:hover{
+            color: #ff7200;
+        }
+
+        .search{
+            width: 330px;
+            float: left;
+            margin-left: 270px;
+        }
+
+        .srch{
+            font-family: 'Times New Roman';
+            width: 200px;
+            height: 40px;
+            background: transparent;
+            border: 1px solid #ff7200;
+            margin-top: 13px;
+            color: #fff;
+            border-right: none;
+            font-size: 16px;
+            float: left;
+            padding: 10px;
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+
+        .btn{
+            width: 100px;
+            height: 40px;
+            background: #ff7200;
+            border: 2px solid #ff7200;
+            margin-top: 13px;
+            color: #fff;
+            font-size: 15px;
+            border-bottom-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            transition: 0.2s ease;
+            cursor: pointer;
+        }
+        .btn:hover{
+            color: #000;
+        }
+
+        .btn:focus{
+            outline: none;
+        }
+
+        .srch:focus{
+            outline: none;
+        }
+
+        .content{
+            width: 1200px;
+            height: auto;
+            margin: auto;
+            color: #fff;
+            position: relative;
+        }
+
+        .content .par{
+            padding-left: 20px;
+            padding-bottom: 25px;
+            font-family: Arial;
+            letter-spacing: 1.2px;
+            line-height: 30px;
+        }
+
+        .content h1{
+            font-family: 'Times New Roman';
+            font-size: 50px;
+            padding-left: 20px;
+            margin-top: 9%;
+            letter-spacing: 2px;
+        }
+
+        .content .cn{
+            width: 160px;
+            height: 40px;
+            background: #ff7200;
+            border: none;
+            margin-bottom: 10px;
+            margin-left: 20px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: .4s ease;
+
+        }
+
+        .content .cn a{
+            text-decoration: none;
+            color: #000;
+            transition: .3s ease;
+        }
+
+        .cn:hover{
+            background-color: #fff;
+        }
+
+        .content span{
+            color: #ff7200;
+            font-size: 65px
+        }
+
+        .form{
+            width: 250px;
+            height: 380px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8)50%,rgba(0,0,0,0.8)50%);
+            position: absolute;
+            top: -20px;
+            left: 870px;
+            transform: translate(0%,-5%);
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .form h2{
+            width: 220px;
+            font-family: sans-serif;
+            text-align: center;
+            color: #ff7200;
+            font-size: 22px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin: 2px;
+            padding: 8px;
+        }
+
+        .form input{
+            width: 240px;
+            height: 35px;
+            background: transparent;
+            border-bottom: 1px solid #ff7200;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            color: #fff;
+            font-size: 15px;
+            letter-spacing: 1px;
+            margin-top: 30px;
+            font-family: sans-serif;
+        }
+
+        .form input:focus{
+            outline: none;
+        }
+
+        ::placeholder{
+            color: #fff;
+            font-family: Arial;
+        }
+
+        .btnn{
+            width: 240px;
+            height: 40px;
+            background: #ff7200;
+            border: none;
+            margin-top: 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #fff;
+            transition: 0.4s ease;
+        }
+        .btnn:hover{
+            background: #fff;
+            color: #ff7200;
+        }
+        .btnn a{
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+        .form .link{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 17px;
+            padding-top: 20px;
+            text-align: center;
+        }
+        .form .link a{
+            text-decoration: none;
+            color: #ff7200;
+        }
+        .liw{
+            padding-top: 15px;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        .icons a{
+            text-decoration: none;
+            color: #fff;
+        }
+        .icons ion-icon{
+            color: #fff;
+            font-size: 30px;
+            padding-left: 14px;
+            padding-top: 5px;
+            transition: 0.3s ease;
+        }
+        .icons ion-icon:hover{
+            color: #ff7200;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+
+        :root {
+            --primary-color: #90e0ef;
+            --secondary-color: #00b4d5;
+            --tertiary-color: #0077b6;
+            --yellow-color: #ffb900;
+            --gray-color: #808080;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Source Sans Pro', sans-serif;
+            line-height: 1;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            background-color: var(--primary-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px 1px rgb(0, 0, 0, 12%);
+            padding: 45px;
+            margin: 15px 0;
+            width: 950px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto 1fr;
+            grid-template-areas:
+                    "images info"
+                    "images description";
+            grid-gap: 35px;
+        }
+
+        .box .images {
+            grid-area: images;
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            grid-template-rows: auto 1fr;
+            grid-template-areas:
+                    "active active active"
+                    "idle idle idle";
+            grid-gap: 5px;
+        }
+
+        .box .images .img-holder img {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .box .images .img-holder.active {
+            grid-area: active;
+        }
+
+        .box .images .img-holder:not(.active):hover {
+            opacity: 0.95;
+            cursor: pointer;
+        }
+
+        .box .basic-info {
+            grid-area: info;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .box .basic-info .rate {
+            color: var(--yellow-color);
+        }
+
+        .box .basic-info span {
+            font-weight: 800;
+            font-size: 25px;
+        }
+
+        .box .basic-info .options a {
+            color: white;
+            background-color: var(--secondary-color);
+            display: inline-block;
+            padding: 10px 15px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 12px;
+            border-radius: 5px;
+        }
+
+        .box .basic-info .options a:hover {
+            background-color: var(--tertiary-color);
+        }
+
+        .box .description {
+            grid-area: description;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .box .description p {
+            color: var(--gray-color);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .box .description .features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            color: var(--gray-color);
+        }
+
+        .box .description .features i {
+            margin-right: 5px;
+        }
+
+        .box .description .features .fa-circle-check {
+            color: var(--tertiary-color);
+        }
+
+        .box .description .features .fa-circle-xmark {
+            color: var(--yellow-color);
+        }
+
+        .box .description .social {
+            list-style: none;
+            display: flex;
+        }
+
+        .box .description .social a {
+            margin-right: 15px;
+            color: var(--gray-color);
+        }
+
+        .box .description .social a:hover {
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 991px) {
+            .box {
+                width: 750px;
+                grid-template-areas:
+                        "info info"
+                        "images description";
+            }
+            .box .basic-info .options a {
+                padding: 8.5px 12px;
+            }
+        }
+
+        @media screen and (max-width: 991px) and (min-width: 769px) {
+            .box .basic-info span {
+                position: absolute;
+                align-self: flex-end;
+            }
+            .box .basic-info .options {
+                position: absolute;
+                align-self: flex-end;
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .box {
+                width: 600px;
+                grid-template-areas:
+                        "images info"
+                        "description description";
+            }
+            .box .images {
+                gap: 3px;
+            }
+            .box .images .img-holder img {
+                border-radius: 5px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .box {
+                width: 100%;
+                min-height: 100vh;
+                border-radius: 0;
+                padding: 35px;
+                margin: 0;
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(3, auto);
+                grid-template-areas:
+                        "images"
+                        "info"
+                        "description";
+            }
+        }
+
+
+    </style>
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/all.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <title>Product Details</title>
+    </head>
+    <body>
+    <div class="container">
+        <div class="box">
+            <div class="images">
+                <div class="img-holder active">
+                    <img class="hinh" src="{{ asset('image/' ~ product.getImage()) }}" alt="{{ product.getTitle() }}">
+                </div>
+
+            </div>
+            <div class="basic-info">
+                <h1>{{ product.title }}</h1>
+                <div class="rate">
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                </div>
+                <span>{{ product.price }}.000.000vnd</span>
+                <div class="options">
+                    <a href="#">Buy It Now</a>
+                    <a href="#">Add to Cart</a>
+                </div>
+            </div>
+            <div class="description">
+                <p> {{ product.description }}</p>
+
+            </div>
+        </div>
+    </div>
+    </body>
+    </html>
+
+
+{% endblock %}
+
+
+
+

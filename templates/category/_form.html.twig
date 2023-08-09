@@ -1,0 +1,39 @@
+<style>
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+
+    }
+
+    .form-control {
+
+    }
+
+    .btn {
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<div class="form-container">
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, { 'attr': {'class': 'form-control'} }) }}
+
+
+
+    </div>
+    <button class="btn btn-primary" type="submit">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+</div>
